@@ -9,7 +9,7 @@ export const useSocket = () => {
 };
 
 export const SocketProvider = (props) => {
-    const socket = useMemo( () => io("localhost:4000") , []);
+    const socket = useMemo( () => io("aivicall.onrender.com") , []);
 
     return (
         <SocketContext.Provider value={socket}>
