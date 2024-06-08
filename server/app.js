@@ -70,7 +70,7 @@ let data = null;
 
     clientID: process.env.CLIENTID,
     clientSecret: process.env.CLIENTSECRET,
-    callbackURL: "http://localhost:4000/auth/google/callback"
+    callbackURL: "https://aivicall.onrender.com/auth/google/callback"
 
   },
 
