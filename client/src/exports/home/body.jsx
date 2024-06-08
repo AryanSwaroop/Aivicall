@@ -22,7 +22,7 @@ const popVariants = {
 }
 
 const google = ()=>{
-    window.open("http://localhost:4000/auth/google/callback","_self")
+    window.open("https://aivicall.onrender.com/auth/google/callback","_self")
 }
 
 
