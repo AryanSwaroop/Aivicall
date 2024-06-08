@@ -9,9 +9,9 @@ const ChatWindow = () => {
 
   const handleShare = () => {
 
-    axios.post("http://localhost:4000/sendData", { message: request } , {
+    axios.post("https://aivicall.onrender.com/sendData", { message: request } , {
       headers: {
-        "Access-Control-Allow-Origin": "http://localhost:3000",
+        "Access-Control-Allow-Origin": "https://aivicall.vercel.app",
         "Access-Control-Allow-Credentials": "true",
         "Content-Type" : "application/json"
       }

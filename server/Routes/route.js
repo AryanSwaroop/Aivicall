@@ -11,7 +11,7 @@ router.get("/login/failed", (req,res)=>{
 
 router.get("/google/callback", passport.authenticate("google",{
     scope:["profile"],
-    successRedirect:"http://localhost:3000/create",
+    successRedirect:"https://aivicall.vercel.app/create",
     failureRedirect:"/login/failed"
 }));
 
