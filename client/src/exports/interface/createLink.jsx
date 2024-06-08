@@ -30,6 +30,7 @@ export default function CreateLink(){
     const [id , setId] = useState("");
     const [linkShow , setlinkShow] = useState(false);
     const [userData , setUserData] = useState("");
+    const [copyDetect , setCopyDetect] = useState(false);
 
     const socket = useSocket();
     const navigate = useNavigate();
@@ -66,6 +67,7 @@ export default function CreateLink(){
         setRoom(userData.data.id);
         navigator.clipboard.writeText(room);
         alert("copied to clipboard !");
+        setCopyDetect(true);
         
     }
     
@@ -90,8 +92,12 @@ export default function CreateLink(){
 
     const preJoin = () => {
         
-        setRoom(userData.data.id);
-        joinHandler();
+        if (copyDetect){
+         setRoom(userData.data.id);
+         joinHandler();
+        } else {
+            alert("Copy the Code to share first !");
+        }
         
     }
 

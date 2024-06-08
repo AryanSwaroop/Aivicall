@@ -14,13 +14,29 @@ const Room = () => {
     const [myStream , setMyStream] = useState();
     const [remoteStream , setRemoteStream ] = useState();
     const [visible , setVisible] = useState(true);
-
+    const [mute , setMute] = useState(false);
     const handleUserJoined = useCallback( ({ id , socketId }) => {
 
         console.log(`${id} joined the room.`);
         setRemoteSocketId(socketId);
 
     },[]);
+
+    const muteHandler = () => {
+
+      if( mute ) {
+
+      setMute(false);
+
+       }
+
+      else {
+
+        setMute(true);
+
+       }
+       
+    }
 
     const handleCallUser = useCallback(async () => {
         const stream = await navigator.mediaDevices.getUserMedia({
@@ -142,19 +158,30 @@ const Room = () => {
       {visible && myStream && <button onClick={sendStreams} className="MeetingButtons">Connect</button>}
       {!myStream && remoteSocketId && <button className="MeetingButtons" onClick={handleCallUser}>Start Meet</button>}
       
-      <div className="videosFrame">     
-      {myStream && (
+      { remoteStream && 
+      
+      <button onClick={muteHandler} className="MuteButton"> {mute ? "Unmute" : "Mute"} </button>
+      
+      }   
+
+      <div className="videosFrame">  
+
+      
+      
+      {remoteStream && (
     
           <ReactPlayer
             playing
-            muted
-            height="15rem"
+            muted = {mute}
+            height="10rem"
             style={{
               border: "solid",
               borderWidth : "0.1rem",
-              borderRadius : "1rem"
+              borderRadius : "1rem",
+              marginLeft : "5%",
+              marginTop : "2%",
             }}
-            width="50%"
+            width="10rem"
             url={myStream}
           />
         
@@ -163,20 +190,26 @@ const Room = () => {
       {remoteStream && (
         
           <ReactPlayer
+
             playing
-            muted
-            height="15rem"
+            muted = {mute}
+            height="10rem"
             style={{
               border: "solid",
               borderWidth : "0.1rem",
               borderRadius : "1rem ",
-              marginTop : "2%"
+              marginTop : "2%",
+              marginLeft : "5%",
             }}
-            width="50%"
+            width="10rem"
             url={remoteStream}
           />
+
+          
         
-      )}
+      ) 
+      
+      }
 
       </div>
 

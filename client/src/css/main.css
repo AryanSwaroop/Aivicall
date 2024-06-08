@@ -247,6 +247,7 @@ body {
     margin-top: 0;
     margin-left: 35%;
     height: 4rem;
+    margin-bottom: 2rem;
     background-color: black;
     border: none;
     border-radius: 2rem;
@@ -260,6 +261,22 @@ body {
     margin-top: 10%;
     font-size: 4rem;
 }
+
+.MuteButton {
+    height: 3rem;
+    width: 10%;
+    font-size: 1.5rem;
+    background-color: white;
+    margin-left: 11.5%;
+    z-index: +3;
+    margin-top: 28rem;
+    border: none;
+    border-radius: 3rem;
+    border: solid;
+    position: absolute;
+}
+
+
 /******************************************room **************************************/
 /**************************************Chat Window ***********************************/
 
@@ -332,3 +349,304 @@ body {
 }
 
 /**************************************Chat Window ***********************************/
+/**************************************Responsive************************************/
+
+@media screen and (max-width : 1200px) {
+
+    .bodyText {
+        margin-top: 6rem;
+        color: black;
+        font-size: 2rem;
+        width: 70%;
+        margin-left: 15%;
+    }
+
+    .startedButton {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        margin-top: 2rem;
+        width: 50%;
+        height: 3rem;
+        font-size: 1.3rem;
+        border-radius: 2rem;
+        border: none;
+        font-weight: 500;
+        color: white;
+        background-color: black;
+        box-shadow: 2px 2px 6px black;
+    
+    } 
+
+    .startedArrow {
+        height: 1.5rem;
+        width: 1.5rem;
+        margin-left: 0.5rem;
+    }
+
+    .blackScreen {
+        z-index: 2;
+        background-color: black;
+        opacity: 80%;
+        position: absolute;
+        width: 100%;
+        height: 200vw;
+    }
+    
+    .popUp {
+        z-index: 3;
+    
+        display: flex;
+        width: 70%;
+        height: 15rem;
+        position: absolute;
+        margin: auto;
+        margin-left: 15%;
+        background-color: black;
+    
+        color: white;
+        flex-direction: column;
+        border-radius: 2rem;
+    }
+    
+    .popUpText {
+        margin: auto;
+        margin-top: 20%;
+        font-size: 2rem;
+        margin-bottom: 0;
+    }
+
+    .googleSign {
+        background-color: white;
+    
+        margin: auto;
+        margin-top: 15%;
+        width: 60%;
+        height: 20%;
+        border: none;
+        border-radius: 10rem;
+        font-size: 2rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    
+    }
+    
+    .googleIcon {
+        height: 2.5rem;
+        margin: auto 0;
+    } 
+
+    
+.meetingButton {
+
+    background-color: black;
+    width: 50%;
+    color: white;
+    font-size: 2rem;
+    border: none;
+    margin-left: 25%;
+    margin-top: 10%;
+    border-radius: 3rem;
+    height: 10rem;
+}
+
+
+
+.linkCopyBox {
+    margin: auto;
+    border: solid;
+    width: 80%;
+    margin-top: 5%;
+    display: flex;
+    border-radius: 0.5rem;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.copyIcon {
+    height: 2rem;
+    width: 2rem;
+}
+
+.meetingIcon {
+    height: 10%;
+    width: 10%;
+}
+
+.startMeetingButton {
+    
+    font-size: 1rem;
+    padding: 1%;
+    background-color: black;
+    border: none;
+    width: 15%;
+    height: 80%;
+    margin: auto;
+    margin-right: 1%;
+    color: white;
+    border-radius: 0.3rem;
+}
+
+.linkText {
+    font-size: 1rem;
+    font-weight: 400;
+    margin: auto 1%;
+    
+}
+
+.startAnotherMeetingButton {
+    font-size: 0.8rem;
+    padding: 1%;
+    background-color: black;
+    border: none;
+    width: 20%;
+    height: 70%;
+    margin: 1%;
+    color: white;
+    border-radius: 0.3rem;
+}
+
+.AnotherlinkText {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin: auto 1%;
+    outline: none;
+    width: 78%;
+    color: black;
+}
+
+.adjustmentlinkCopyBox {
+    margin-top: 2%;
+}
+
+
+
+
+
+.MainScreen {
+    width: 100%;
+    margin-top: 4%;
+    display: flex;
+    flex-direction: column;
+}
+
+.localPlayer {
+    width: 80%;
+    height: 5%;
+    margin-left: 5%;
+    border: solid;
+    border-color: black;
+}
+
+.videosFrame {
+    width:80%;
+    display: flex;
+    flex-direction: row;
+    margin-left: 10%;
+    margin-top: 3%
+}
+
+.MuteButton {
+    
+    position: static;
+    height: 3rem;
+    width: 25%;
+    font-size: 1rem;
+    background-color: white;
+    margin-left: 37%;
+    border: none;
+    border-radius: 3rem;
+    border: solid;
+    margin-top: 0;
+
+} 
+
+/**************************************Chat Window ***********************************/
+
+.chatOutline {
+    float: right;
+    margin-top: 10%;
+    height: 20rem;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin-left: 5%;
+    border: solid;
+    border-width: 0.1rem;
+    border-radius: 2rem;
+    margin-right: 5%;
+    margin-bottom: 3rem;
+}
+
+.chatBox {
+    border-radius: 1rem;
+    margin-top: 5%;
+    width: 65%;
+    border: none;
+    margin-left: 5%;
+    height: 100%;
+    border: solid;
+    outline: none;
+    padding-left: 5%;
+    border-width: 0.05rem;
+    font-size: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.25) 4px 15px 15px;
+    
+}
+
+.sendButton {
+    margin-left: 3%;
+    margin-top: 5%;
+    height: 100%;
+    width: 17%;
+    background-color: black;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    border-radius: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.25) 4px 15px 15px;
+}
+
+.writingSec {
+    display: flex;
+    flex-direction: row;
+    height: 10%;
+}
+
+.outputSec {
+    margin-top: 15%;
+    width: 90%;
+    margin-left: 5%;
+    height: 60%;
+
+    
+    border-radius: 1rem;
+}
+
+.textField {
+    
+    font-size: 1.2rem;
+    border-radius: 1rem;
+    height: 100%;
+    margin-left: 5%;
+    width: 90%;
+    overflow: scroll;
+}
+
+.waitingMessage {
+
+    margin-left: 10%;
+    margin-top: 10%;
+    font-size: 3rem;
+
+} 
+
+/**************************************Chat Window ***********************************/
+
+
+}
+
+/**************************************Responsive************************************/
