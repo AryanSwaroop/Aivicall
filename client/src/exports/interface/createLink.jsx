@@ -4,10 +4,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSocket } from "../../Context/SocketProvider";
 
-
-
-
-
 const linkVariant = {
     hidden : {
         opacity : 0,
@@ -36,11 +32,10 @@ export default function CreateLink(){
     const socket = useSocket();
     const navigate = useNavigate();
 
-    
         axios({
             method : "GET",
         
-            url : "https://aivicall.onrender.com/meet/meetCode",
+            url : "https://aivicall.onrender.com/meet",
         
             headers: {
                 "Access-Control-Allow-Origin" : "https://aivicall.vercel.app",

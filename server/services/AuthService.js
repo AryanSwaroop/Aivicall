@@ -25,13 +25,12 @@ class AuthService {
             done(null, user);
         });
 
-        
     }
 
     getProfileData() {
         return this.profileData;
     };
-    
+
 }
 
 module.exports = AuthService;
