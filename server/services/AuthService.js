@@ -2,9 +2,10 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20');
 require('dotenv').config();
 
-let profileData = null;
     
 class AuthService {
+
+    profileData = null;
     
     constructor() {
 
