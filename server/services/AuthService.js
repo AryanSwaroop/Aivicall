@@ -1,26 +1,20 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20');
 require('dotenv').config();
+const API_ENDPOINTS = require('../API/endpoints');
 
-    
 class AuthService {
-    
     constructor() {
-
-        this.profileData = null;
-
         passport.use(new GoogleStrategy({
             clientID: process.env.CLIENTID,
             clientSecret: process.env.CLIENTSECRET,
-            callbackURL: "https://aivicall.onrender.com/auth/google/callback"
+            callbackURL: API_ENDPOINTS.BACK_CALLBACK
+            
         }, (token, refreshToken, profile, done) => {
-
             console.log('===== GOOGLE PROFILE =======');
-
-            this.profileData = profile;
-
+            this.profileData = profile; // Correctly refers to the AuthService instance
+            console.log(profile);
             console.log('======== END ===========');
-
             done(null, profile);
         }));
 
@@ -31,13 +25,13 @@ class AuthService {
         passport.deserializeUser((user, done) => {
             done(null, user);
         });
-
     }
 
     getProfileData() {
+        console.log(this.profileData);
         return this.profileData;
-    };
-
+    }
 }
+
 
 module.exports = AuthService;

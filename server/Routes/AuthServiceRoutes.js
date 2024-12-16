@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const AuthService = require('../services/AuthService');
 const passport = require('passport');
+const API_ENDPOINTS = require('../API/endpoints');
 
 const authService = new AuthService();
 
@@ -17,7 +18,7 @@ router.get("/login/failed", (req,res)=>{
 
 router.get("/google/callback", passport.authenticate("google",{
     scope:["profile"],
-    successRedirect:"https://aivicall.vercel.app/create",
+    successRedirect: API_ENDPOINTS.AUTH_SUCCESS_ROUTE,
     failureRedirect:"/login/failed"
 }));
 

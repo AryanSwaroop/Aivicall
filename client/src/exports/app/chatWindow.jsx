@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import API_ENDPOINTS from "../../api/endpoints";
 
 const ChatWindow = () => {
 
@@ -9,9 +10,9 @@ const ChatWindow = () => {
 
   const handleShare = () => {
 
-    axios.post("https://aivicall.onrender.com/ai/generate", { message: request } , {
+    axios.post( API_ENDPOINTS.AI_POST_ROUTE , { message: request } , {
       headers: {
-        "Access-Control-Allow-Origin": "https://aivicall.vercel.app",
+        "Access-Control-Allow-Origin": API_ENDPOINTS.FRONT_URL,
         "Access-Control-Allow-Credentials": "true",
         "Content-Type" : "application/json"
       }

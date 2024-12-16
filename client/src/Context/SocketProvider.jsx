@@ -1,5 +1,6 @@
 import React , { createContext, useMemo , useContext } from "react";
 import { io } from "socket.io-client";
+import API_ENDPOINTS from "../api/endpoints";
 
 const SocketContext = createContext(null);
 
@@ -9,7 +10,7 @@ export const useSocket = () => {
 };
 
 export const SocketProvider = (props) => {
-    const socket = useMemo( () => io("aivicall.onrender.com") , []);
+    const socket = useMemo( () => io(API_ENDPOINTS.BACK_ORIGIN) , []);
 
     return (
         <SocketContext.Provider value={socket}>

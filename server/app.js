@@ -12,12 +12,13 @@ const AIService = require('./services/AIService');
 const AuthService = require('./services/AuthService');
 const SocketService = require('./services/SocketService');
 const MeetRoute = require('./Routes/MeetingRoute');
+const API_ENDPOINTS = require('./API/endpoints');
 
 const app = express();
 const server = http.createServer(app);
 const io = socketIO(server, {
     cors: {
-        origin: "https://aivicall.vercel.app"
+        origin: API_ENDPOINTS.FRONT_URL
     }
 });
 
@@ -37,7 +38,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cors({
-    origin: "https://aivicall.vercel.app",
+    origin: API_ENDPOINTS.FRONT_URL,
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
     SameSite: "none"
@@ -52,4 +53,4 @@ app.use("/meet", MeetRoute);
 socketService.setup();
 
 // Server setup
-server.listen(4000);
+server.listen(5000);

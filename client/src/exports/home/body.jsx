@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
+import API_ENDPOINTS from "../../api/endpoints";
 
 
 const popVariants = {
@@ -22,7 +23,7 @@ const popVariants = {
 }
 
 const google = ()=>{
-    window.open("https://aivicall.onrender.com/auth/google/callback","_self")
+    window.open(API_ENDPOINTS.BACK_CALLBACK , "_self")
 }
 
 export default function Body(){

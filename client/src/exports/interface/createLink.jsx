@@ -3,6 +3,7 @@ import { useState , useEffect, useCallback } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSocket } from "../../Context/SocketProvider";
+import API_ENDPOINTS from "../../api/endpoints";
 
 const linkVariant = {
     hidden : {
@@ -35,10 +36,10 @@ export default function CreateLink(){
         axios({
             method : "GET",
         
-            url : "https://aivicall.onrender.com/meet/meetCode",
+            url : API_ENDPOINTS.GET_MEET_CODE,
         
             headers: {
-                "Access-Control-Allow-Origin" : "https://aivicall.vercel.app",
+                "Access-Control-Allow-Origin" : API_ENDPOINTS.FRONT_URL,
                  Accept:"application/json",
                 'Content-Type':"application/json",
                 'Access-Control-Allow-Credentials': true
