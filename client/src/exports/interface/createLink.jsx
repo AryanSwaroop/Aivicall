@@ -35,7 +35,7 @@ export default function CreateLink(){
         axios({
             method : "GET",
         
-            url : "https://aivicall.onrender.com/meet",
+            url : "https://aivicall.onrender.com/meet/meetCode",
         
             headers: {
                 "Access-Control-Allow-Origin" : "https://aivicall.vercel.app",
