@@ -4,10 +4,10 @@ require('dotenv').config();
 
     
 class AuthService {
-
-    profileData = null;
     
     constructor() {
+
+        this.profileData = null;
 
         passport.use(new GoogleStrategy({
             clientID: process.env.CLIENTID,
@@ -17,7 +17,7 @@ class AuthService {
 
             console.log('===== GOOGLE PROFILE =======');
 
-            profileData = profile;
+            this.profileData = profile;
 
             console.log('======== END ===========');
 
@@ -35,7 +35,7 @@ class AuthService {
     }
 
     getProfileData() {
-        return profileData;
+        return AuthService.profileData;
     };
 
 }
