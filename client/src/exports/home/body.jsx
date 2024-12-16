@@ -25,7 +25,6 @@ const google = ()=>{
     window.open("https://aivicall.onrender.com/auth/google/callback","_self")
 }
 
-
 export default function Body(){
 
     const [popStatus , setStatus] = useState(false);

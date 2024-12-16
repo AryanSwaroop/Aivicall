@@ -58,10 +58,9 @@ export default function CreateLink(){
             console.log(err);
         })
 
-    const handleCopy = async () => {
+    const handleCopy = () => {
 
-        const code = await userData.data.id; 
-        setRoom(code);
+        setRoom(userData.data.id);
         navigator.clipboard.writeText(room);
         alert("copied to clipboard !");
         setCopyDetect(true);

@@ -15,7 +15,6 @@ router.get("/login/failed", (req,res)=>{
     })
 });
 
-
 router.get("/google/callback", passport.authenticate("google",{
     scope:["profile"],
     successRedirect:"https://aivicall.vercel.app/create",
