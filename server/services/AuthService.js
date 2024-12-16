@@ -35,7 +35,7 @@ class AuthService {
     }
 
     getProfileData() {
-        return AuthService.profileData;
+        return this.profileData;
     };
 
 }
