@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState , useEffect, useCallback } from "react";
+import { useState , useEffect, useCallback, useDebugValue } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSocket } from "../../Context/SocketProvider";
@@ -28,11 +28,11 @@ export default function CreateLink(){
     const [id , setId] = useState("");
     const [linkShow , setlinkShow] = useState(false);
     const [userData , setUserData] = useState("");
-    const [copyDetect , setCopyDetect] = useState(false);
 
     const socket = useSocket();
     const navigate = useNavigate();
 
+    useEffect(()=> {
         axios({
             method : "GET",
         
@@ -49,6 +49,7 @@ export default function CreateLink(){
         
         .then((res) => {
 
+            console.log(res);
             setUserData(res);
             const temp = JSON.parse(JSON.stringify(res.data.displayName).replace(/ /g,''));
             setId(temp);
@@ -58,20 +59,20 @@ export default function CreateLink(){
         .catch((err) => {
             console.log(err);
         })
+    },[setlinkShow])
+
 
     const handleCopy = () => {
 
         setRoom(userData.data.id);
         navigator.clipboard.writeText(room);
         alert("copied to clipboard !");
-        setCopyDetect(true);
         
     }
     
     const joinHandler = useCallback(
 
         (e) => {
-            
             navigator.clipboard.writeText(room);
             socket.emit("room:join" , {id , room});
         },
@@ -89,7 +90,7 @@ export default function CreateLink(){
 
     const preJoin = () => {
         
-        if (copyDetect){
+        if (setlinkShow){
          setRoom(userData.data.id);
          joinHandler();
         } else {

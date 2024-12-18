@@ -1,12 +1,29 @@
 const express = require("express");
 const router = express.Router();
 const AuthService = require('../services/AuthService');
+const fs = require('fs'); 
 
-const authServiceProfile = new AuthService();
-const meetCode = authServiceProfile.getProfileData(); 
+router.get("/meetcode", (req,res) => {
 
-router.get("/meetCode", (req,res) => {
-    res.send(meetCode);
+    fs.readFile('data.json', 'utf-8', (err, data) => {
+        if (err) {
+            console.error('Error reading the file:', err);
+            return;
+        }
+    
+        const jsonData = JSON.parse(data);
+         res.send(jsonData);
+
+    });
+
+    fs.unlink('data.json', (unlinkErr) => {
+        if (unlinkErr) {
+            console.error('Error deleting the file:', unlinkErr);
+        } else {
+            console.log('File deleted successfully.');
+        }
+    });
+    
 });
 
 module.exports = router;
