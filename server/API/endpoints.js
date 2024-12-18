@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 // Base URL (can be adjusted for different environments)
-const BASE_URL_FRONT = "https://aivicall.vercel.app/";
+const BASE_URL_FRONT = "https://aivicall.vercel.app";
 const BASE_URL_BACK = "https://aivicall.onrender.com";
 const BASE_ORIGIN_FRONT = "aivicall.vercel.app";
 const BASE_ORIGIN_BACK = "aivicall.onrender.com";
