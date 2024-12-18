@@ -2,12 +2,11 @@
 
 # Aivicall
 
-Aivicall is a web-based platform designed to enhance communication by integrating AI-driven voice recognition and transcription features. It is built using modern web technologies and aims to simplify communication processes for users.
+Aivicall is a web-based platform designed to enhance communication by integrating AI-driven features. It is built using modern web technologies and aims to simplify communication processes for users.
 
 ## Features
 
 - **Voice Recognition**: Utilize AI models for accurate voice recognition.
-- **Real-time Transcription**: Convert spoken words into text in real-time.
 - **User-friendly Interface**: Easy-to-use web interface for seamless communication.
 - **Integration Options**: APIs for integrating into other applications.
 
