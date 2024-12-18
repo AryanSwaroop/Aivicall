@@ -1,10 +1,10 @@
 require('dotenv').config();
 
 // Base URL (can be adjusted for different environments)
-const BASE_URL_FRONT = process.env.react_frontend || "http://localhost:3000";
-const BASE_URL_BACK = process.env.react_backend || "http://localhost:5000";
-const BASE_ORIGIN_FRONT = process.env.origin_frontend || "localhost:3000";
-const BASE_ORIGIN_BACK = process.env.origin_backend || "localhost:5000";
+const BASE_URL_FRONT = "https://aivicall.vercel.app/";
+const BASE_URL_BACK = "https://aivicall.onrender.com";
+const BASE_ORIGIN_FRONT = "aivicall.vercel.app";
+const BASE_ORIGIN_BACK = "aivicall.onrender.com";
 
 
 const API_ENDPOINTS = {
