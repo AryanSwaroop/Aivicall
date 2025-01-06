@@ -104,7 +104,7 @@ body {
     background-color: white;
 
     margin: auto;
-    margin-top: 15%;
+    margin-top: 10%;
     width: 60%;
     height: 15%;
     border: none;
@@ -120,6 +120,12 @@ body {
     height: 2.5rem;
     margin: auto 0;
 }
+
+.loginManually {
+    margin: auto;
+    font-size: 1rem;
+    margin-top: 0.1rem;
+}
 /*************************************BlackScreen**************************************/
 
 .blackScreen {
@@ -131,6 +137,65 @@ body {
     height: 54vw;
 }
 /************************************* Body *******************************************/
+
+/*************************************form***********************************/
+
+.fromDiv {
+    height: fit-content;
+    background-color: black;
+    width: 20rem;
+    border-radius: 1rem;
+    padding: 2rem;
+    margin: auto;
+    display: grid;
+    gap: 1.5rem;
+    justify-content: space-evenly;
+    margin-top: 10%;
+}
+
+.nameDiv {
+    display: grid;
+    grid-template-columns: 47% 47%;
+    gap: 6%;
+
+}
+
+.nameDivInput {
+    height: 2rem;
+    font-size: 0.8rem;
+    border-radius: 0.5rem;
+    border: none;
+    padding-left: 1rem;
+}
+
+.submitBtn {
+    height: 3rem;
+    background-color: white;
+    width: 10rem;
+    color: black;
+    border-radius: 0.6rem;
+    font-size: 1rem;
+    border: none;
+    margin: auto;
+    margin-top: 1%;
+}
+
+.BigDiv {
+    height: 2rem;
+    font-size: 0.8rem;
+    border-radius: 0.5rem;
+    border: none;
+    padding-left: 1rem;
+}
+
+.BigDiv:focus {
+    outline: none;
+}
+
+.nameDivInput:focus {
+    outline: none;
+}
+/**************************************form**********************************/
 
 /*************************************** Create Screen ********************************/
 

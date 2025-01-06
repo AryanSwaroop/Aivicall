@@ -13,6 +13,10 @@ const AuthService = require('./services/AuthService');
 const SocketService = require('./services/SocketService');
 const MeetRoute = require('./Routes/MeetingRoute');
 const API_ENDPOINTS = require('./API/endpoints');
+const registerRoute = require('./Routes/AuthManualRoute');
+const db = require('./DB/db');
+const cookieParser = require('cookie-parser');
+
 
 const app = express();
 const server = http.createServer(app);
@@ -35,6 +39,7 @@ app.use(session({
     saveUninitialized: true,
     cookie: { secure: true }
 }));
+app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cors({
@@ -48,9 +53,16 @@ app.use(cors({
 app.use("/auth", authRoute);
 app.use("/ai", AIServiceRoutes);
 app.use("/meet", MeetRoute);
+app.use("/manual", registerRoute);
 
 // Socket.io setup
 socketService.setup();
 
+// Database Setup
+const database = new db();
+database.connect();
+
 // Server setup
-server.listen(5000);
+server.listen(5000, () => {
+    console.log("Server is running on port 5000");
+});

@@ -28,6 +28,10 @@ const google = ()=>{
 
 export default function Body(){
 
+    const LoadForm = () => {
+        window.location.href = "/form"
+    }
+
     const [popStatus , setStatus] = useState(false);
 
     return(
@@ -67,6 +71,8 @@ export default function Body(){
                 whileHover= {{rotate : -360}}
             />
             </button>
+
+            <a className="loginManually" onClick={LoadForm}>Login Manually</a>
             </motion.div>
         ) 
         }
