@@ -1,10 +1,8 @@
 import { useState } from "react";
 import Navbar from "./navbar";
 
-const Form = () => {
+const Login = () => {
   const [login, setLogin] = useState({
-    FirstName: "",
-    LastName: "",
     Email: "",
     Password: "",
   });
@@ -30,25 +28,11 @@ const Form = () => {
       <Navbar />
       <div className="flex flex-col items-center justify-center h-screen">
       <form
-        className="w-full max-w-lg mx-auto p-6 bg-white rounded-lg shadow-lg"
+        className="w-full mb-20 max-w-lg mx-auto p-6 bg-white rounded-lg shadow-lg"
         onSubmit={(e) => {
           handleSubmit(e);
         }}
       >
-        <div className="flex gap-4 mb-4">
-          <input
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            type="text"
-            placeholder="FirstName"
-            onChange={(e) => setValue(e)}
-          />
-          <input
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            type="text"
-            placeholder="LastName"
-            onChange={(e) => setValue(e)}
-          />
-        </div>
 
         <input
           className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -67,18 +51,12 @@ const Form = () => {
           className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition"
           type="submit"
         >
-          SignUp
+          Login
         </button>
       </form>
-      <a
-        className="mt-5 text-blue-500 cursor-pointer hover:underline"
-          onClick={loadSignup}
-          >
-          Not New ? Login Here
-      </a>
       </div>
     </>
   );
 };
 
-export default Form;
+export default Login;
