@@ -1,4 +1,4 @@
-const { GoogleGenerativeAI } = require("@google/generative-ai");
+const GoogleGenerativeAI = require("@google/generative-ai");
 
 class AIService {
     constructor(genAI) {
