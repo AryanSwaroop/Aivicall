@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+require("dotenv").config();
 
 class db {
     constructor() {
@@ -6,7 +7,7 @@ class db {
     }
 
     connect() {
-        mongoose.connect("mongodb://localhost:27017/Aivicall");
+        mongoose.connect(process.env.MONGO_URI || "mongodb://localhost:27017");
     }
 
     close() {
