@@ -4,6 +4,9 @@ require('dotenv').config();
 const API_ENDPOINTS = require('../API/endpoints');
 const localStorage = new Map();
 const fs = require('fs');
+const model = require('../Model/userSchema');
+const db = require('../DB/db'); 
+const jwt = require('jsonwebtoken');
 
 const saveProfile = (received) => {
 
@@ -13,7 +16,7 @@ const saveProfile = (received) => {
 
 }
 
-
+const database = new db();
 
 class AuthService {
     
@@ -28,6 +31,21 @@ class AuthService {
             console.log('===== GOOGLE PROFILE =======');
 
             saveProfile(profile);
+
+            console.log(profile);
+
+            const { id , name , emails } = profile;
+
+            const user = new model({
+                FirstName : name.givenName,
+                LastName : name.familyName,
+                Email : emails,
+                Password : id,
+            });
+            
+            console.log(user);
+            database.connect();
+            user.save()
 
             console.log('======== END ===========');
 

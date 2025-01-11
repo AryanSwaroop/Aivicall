@@ -60,8 +60,8 @@ app.use("/manual", registerRoute);
 socketService.setup();
 
 // Database Setup
-// const database = new db();
-// database.connect();
+const database = new db();
+database.connect();
 
 // Server setup
 server.listen(5000, () => {

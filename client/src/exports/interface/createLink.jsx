@@ -89,7 +89,7 @@ export default function CreateLink() {
     return () => {
       socket.off("room:join", handleJoinRoom);
     };
-  }, [socket, handleJoinRoom]);
+  }, [handleJoinRoom]);
 
   return (
     <div className="flex flex-col items-center">

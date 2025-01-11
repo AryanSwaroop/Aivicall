@@ -1,5 +1,8 @@
 import { useState } from "react";
 import Navbar from "./navbar";
+import axios from 'axios';
+import API_ENDPOINTS from "../../api/endpoints";
+
 
 const Form = () => {
   const [login, setLogin] = useState({
@@ -20,7 +23,30 @@ const Form = () => {
     });
   };
 
+  const sendSignup = () => {
+
+    axios.post(API_ENDPOINTS.MANUAL_REGISTER , login 
+      , {
+        headers: {
+          "Access-Control-Allow-Origin": API_ENDPOINTS.FRONT_URL,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      }
+     )
+    .then((res) => {
+      console.log("User registered successfully");
+      window.location.href = "/login";
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+  }
+
   const handleSubmit = (e) => {
+    sendSignup();
     e.preventDefault();
     console.log(login);
   };

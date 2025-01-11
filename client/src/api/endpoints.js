@@ -17,7 +17,9 @@ const API_ENDPOINTS = {
   FRONT_ORIGIN : BASE_ORIGIN_FRONT,
   BACK_ORIGIN : BASE_ORIGIN_BACK,
   BACK_CALLBACK : `${BASE_URL_BACK}/auth/google/callback`,
-  AI_POST_ROUTE: `${BASE_URL_BACK}/ai/generate`
+  AI_POST_ROUTE: `${BASE_URL_BACK}/ai/generate`,
+  MANUAL_REGISTER: `${BASE_URL_BACK}/manual/register`,
+  MANUAL_LOGIN: `${BASE_URL_BACK}/manual/login`
 };
 
 
