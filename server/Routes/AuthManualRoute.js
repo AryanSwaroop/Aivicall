@@ -61,6 +61,8 @@ router.post("/register", (req,res) => {
                 jwt.sign( { userID : user._id }, process.env.JWT_SECRET, {expiresIn : '60s'} , (err, token) => {
                     if(err) {
                         res.status(500).json({message: "Token generation failed"});
+                        console.log(err);
+                        console.log(user);
                     }
                     else {    
                      res.cookie("token" , token);
@@ -100,7 +102,7 @@ router.post("/login", async (req, res) => {
 
         res.cookie("token", token);
         res.status(200).json({message: "User registered successfully"});
-        
+
     } catch (err) {
         return res.status(500).json({ message: "Login failed", error: err.message });
     }
