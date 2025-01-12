@@ -30,11 +30,12 @@ const Form = () => {
       .post(API_ENDPOINTS.MANUAL_REGISTER, login)
       .then((res) => {
         console.log("User registered successfully");
-        window.location.href = "/login";
       })
       .catch((err) => {
         console.log(err);
       });
+
+      window.location.href = "/login";
 
   }
 
