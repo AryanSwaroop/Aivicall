@@ -62,7 +62,9 @@ router.post("/register", (req,res) => {
                     if(err) {
                         res.status(500).json({message: "Token generation failed"});
                     }
-                    res.cookie("token" , token);
+                    else {    
+                     res.cookie("token" , token);
+                    }
                 })
             })
             .catch((err) => {
@@ -95,7 +97,6 @@ router.post("/login", async (req, res) => {
 
         const token = jwt.sign({ userId: found._id }, process.env.JWT_SECRET, { expiresIn: '60s' });
         res.cookie("token", token);
-        return res.status(200).json({ message: "Login successful", user: found });
     } catch (err) {
         return res.status(500).json({ message: "Login failed", error: err.message });
     }
