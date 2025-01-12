@@ -54,11 +54,6 @@ app.use(cors({
     sameSite: 'none' 
 }));
 
-// Routes
-app.use("/auth", authRoute);
-app.use("/ai", AIServiceRoutes);
-app.use("/meet", MeetRoute);
-app.use("/manual", registerRoute);
 
 // Socket.io setup
 socketService.setup();
@@ -66,6 +61,13 @@ socketService.setup();
 // Database Setup
 const database = new db();
 database.connect();
+
+// Routes
+app.use("/auth", authRoute);
+app.use("/ai", AIServiceRoutes);
+app.use("/meet", MeetRoute);
+app.use("/manual", registerRoute);
+
 
 // Server setup
 server.listen(5000, () => {
