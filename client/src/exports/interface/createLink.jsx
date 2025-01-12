@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSocket } from "../../Context/SocketProvider";
 import API_ENDPOINTS from "../../api/endpoints";
+import axiosInstance from "../../api/apiInstance";
 
 const linkVariant = {
   hidden: {
@@ -32,16 +33,8 @@ export default function CreateLink() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios({
-      method: "GET",
-      url: API_ENDPOINTS.GET_MEET_CODE,
-      headers: {
-        "Access-Control-Allow-Origin": API_ENDPOINTS.FRONT_URL,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Credentials": true,
-      },
-    })
+    axiosInstance
+      .get(API_ENDPOINTS.GET_MEET_CODE)
       .then((res) => {
         setUserData(res);
         const temp = JSON.parse(JSON.stringify(res.data.displayName).replace(/ /g, ""));
@@ -50,6 +43,8 @@ export default function CreateLink() {
       .catch((err) => {
         console.log(err);
       });
+
+
   }, [setlinkShow]);
 
   const handleCopy = () => {

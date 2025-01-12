@@ -12,14 +12,16 @@ const BASE_ORIGIN_BACK = "aivicall.onrender.com";
 // const BASE_ORIGIN_BACK = "localhost:5000";
 
 const API_ENDPOINTS = {
-  FRONT_URL: BASE_URL_FRONT ,
+  FRONT_URL: BASE_URL_FRONT,
+  BACK_URL: BASE_URL_BACK,
   GET_MEET_CODE: `${BASE_URL_BACK}/meet/meetCode`,
   FRONT_ORIGIN : BASE_ORIGIN_FRONT,
   BACK_ORIGIN : BASE_ORIGIN_BACK,
   BACK_CALLBACK : `${BASE_URL_BACK}/auth/google/callback`,
-  AI_POST_ROUTE: `${BASE_URL_BACK}/ai/generate`,
-  MANUAL_REGISTER: `${BASE_URL_BACK}/manual/register`,
-  MANUAL_LOGIN: `${BASE_URL_BACK}/manual/login`
+  AI_POST_ROUTE: `/ai/generate`,
+  MANUAL_REGISTER: `/manual/register`,
+  MANUAL_LOGIN: `/manual/login`,
+  SIGNOUT: `/manual/signout`
 };
 
 

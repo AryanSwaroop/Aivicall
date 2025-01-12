@@ -1,24 +1,18 @@
 import React, { useState } from "react";
 import axios from "axios";
 import API_ENDPOINTS from "../../api/endpoints";
+import axiosInstance from "../../api/apiInstance";
 
 const ChatWindow = () => {
   const [request, setRequest] = useState("");
   const [promptResult, setPromptResult] = useState("");
 
   const handleShare = () => {
-    axios
+    axiosInstance
       .post(
-        API_ENDPOINTS.AI_POST_ROUTE,
-        { message: request },
-        {
-          headers: {
-            "Access-Control-Allow-Origin": API_ENDPOINTS.FRONT_URL,
-            "Access-Control-Allow-Credentials": "true",
-            "Content-Type": "application/json",
-          },
-        }
-      )
+          API_ENDPOINTS.AI_POST_ROUTE,
+          { message: request },
+        )
       .then((res) => {
         setPromptResult(res.data);
       });

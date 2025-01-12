@@ -18,17 +18,21 @@ let data = {
         givenName : String
     }
 }
-const saveProfile = (received) => {
 
-     data.displayName = received.FirstName + " " + received.LastName;
-     data.id = received._id;
-     data.name.familyName = received.LastName;
-     data.name.givenName = received.FirstName;
+const saveProfile = async (received) => {
+    data.displayName = `${received.FirstName} ${received.LastName}`;
+    data.id = received._id;
+    data.name.familyName = received.LastName;
+    data.name.givenName = received.FirstName;
 
-     fs.writeFileSync('data.json', JSON.stringify(data, null, 2), 'utf-8');
-     console.log('JSON data saved to file.');
+    try {
+        await fs.promises.writeFile('data.json', JSON.stringify(data, null, 2), 'utf-8');
+        console.log('JSON data saved to file.');
+    } catch (err) {
+        console.error("Error saving profile data:", err);
+    }
+};
 
-}
 
 router.post("/register", (req,res) => {
 
@@ -54,7 +58,7 @@ router.post("/register", (req,res) => {
             user.save()
 
             .then(() => {
-                jwt.sign({user}, process.env.JWT_SECRET, {expiresIn : '60s'} , (err, token) => {
+                jwt.sign( { userID : user._id }, process.env.JWT_SECRET, {expiresIn : '60s'} , (err, token) => {
                     if(err) {
                         res.status(500).json({message: "Token generation failed"});
                     }
@@ -72,41 +76,36 @@ router.post("/register", (req,res) => {
 });
 
 
-router.post("/login", (req, res) => {
+router.post("/login", async (req, res) => {
     const { Email, Password } = req.body;
 
-    if( req.cookies.token ) {
+    if (req.cookies.token) {
         return res.status(200).json({ message: "User already logged in" });
     }
-    
-    model.findOne({ Email }).then(found => {
+
+    try {
+        const found = await model.findOne({ Email });
         if (!found) {
             return res.status(404).json({ message: "User not found" });
         }
 
-        // Compare passwords
-        bcrypt.compare(Password, found.Password, (err, result) => {
-            if (err) {
-                return res.status(500).json({ message: "Password comparison failed" });
-            }
-            if (result) {
-                // Password matches
-                jwt.sign({ userId: found._id }, process.env.JWT_SECRET, {expiresIn : '60s'} , (err, token) => {
-                    if (err) {
-                        return res.status(500).json({ message: "Token generation failed" });
-                    }
-                    res.cookie("token", token);
-                    return res.status(200).json({ message: "Login successful", user: found });
-                });
-            } else {
-                // Password doesn't match
-                return res.status(401).json({ message: "Invalid credentials" });
-            }
-        });
-    }).catch(err => {
+        const isMatch = bcrypt.compare(Password, found.Password);
+        if (!isMatch) {
+            return res.status(401).json({ message: "Invalid credentials" });
+        }
+
+        const token = jwt.sign({ userId: found._id }, process.env.JWT_SECRET, { expiresIn: '60s' });
+        res.cookie("token", token);
+        return res.status(200).json({ message: "Login successful", user: found });
+    } catch (err) {
         return res.status(500).json({ message: "Login failed", error: err.message });
-    });
+    }
 });
+
+router.post("/login", async (req, res) => {
+    res.clearCookie("token");
+});
+
 
 
 module.exports = router;

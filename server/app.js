@@ -1,4 +1,3 @@
-require('dotenv').config();
 const express = require('express');
 const passport = require('passport');
 const cors = require('cors');
@@ -17,7 +16,6 @@ const registerRoute = require('./Routes/AuthManualRoute');
 const db = require('./DB/db');
 const cookieParser = require('cookie-parser');
 
-
 const app = express();
 const server = http.createServer(app);
 const io = socketIO(server, {
@@ -32,22 +30,28 @@ const authService = new AuthService();
 const socketService = new SocketService(io);
 
 // Middleware setup
+app.use(cookieParser()); 
 app.use(express.json());
+
+// Session middleware
 app.use(session({
     secret: 'somethingsecretgoeshere',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true }
+    cookie: {
+        secure: process.env.NODE_ENV === 'production',  // Secure only in production (HTTPS)
+        httpOnly: true,  // Ensures cookie is not accessible via JavaScript (CSRF protection)
+        sameSite: 'none' 
+    }
 }));
 
-app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cors({
     origin: API_ENDPOINTS.FRONT_URL,
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
-    SameSite: "none"
+    sameSite: 'none' 
 }));
 
 // Routes

@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { motion } from "framer-motion";
+import axiosInstance from "../../api/apiInstance";
+import API_ENDPOINTS from "../../api/endpoints";
 
 const cameraVariant = {
   hidden: {
@@ -17,13 +19,28 @@ const cameraVariant = {
   },
 };
 
+
+
 const Navbar = () => {
+
+  const handleClearCookies = useCallback(() => {
+    axiosInstance
+      .post(API_ENDPOINTS.SIGNOUT , {})
+      .then((res) => {
+        console.log(res);
+        window.location.href = "/";
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    },[]);
+
   const handleHoom = () => {
     window.location.href = "/";
   };
 
   return (
-    <div className="flex h-20.5 items-center justify-start p-4 bg-white shadow-md">
+    <div className="flex h-20.5 items-center justify-between p-4 bg-white shadow-md">
       <svg
         onClick={handleHoom}
         className="navbarIcon cursor-pointer w-10 h-10 hover:scale-110 transition-transform"
@@ -42,6 +59,7 @@ const Navbar = () => {
           animate="visible"
         />
       </svg>
+      <button className="h-fit w-fit p-2 shadow-md rounded-sm bg-gray-700 text-slate-50 border-5 " onClick={handleClearCookies}> Logout </button>
     </div>
   );
 };
