@@ -4,17 +4,18 @@ const cors = require('cors');
 const session = require('express-session');
 const http = require('http');
 const socketIO = require('socket.io');
-const authRoute = require('./Routes/AuthServiceRoutes');
-const AIServiceRoutes = require('./Routes/AIServiceRoutes');
+const authRoute = require('./Routes/AuthServiceRoutes.js');
+const AIServiceRoutes = require('./Routes/AIServiceRoutes.js');
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const AIService = require('./services/AIService');
 const AuthService = require('./services/AuthService');
 const SocketService = require('./services/SocketService');
 const MeetRoute = require('./Routes/MeetingRoute');
 const API_ENDPOINTS = require('./API/endpoints');
-const registerRoute = require('./Routes/AuthManualRoute');
-const db = require('./DB/db');
+const registerRoute = require('./Routes/AuthManualRoute.js');
+const db = require('./DB/db.js');
 const cookieParser = require('cookie-parser');
+
 
 const app = express();
 const server = http.createServer(app);
@@ -32,6 +33,7 @@ const socketService = new SocketService(io);
 // Middleware setup
 app.use(cookieParser()); 
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 // Session middleware
 app.use(session({
@@ -45,6 +47,7 @@ app.use(session({
     }
 }));
 
+// Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cors({
@@ -58,9 +61,11 @@ app.use(cors({
 // Socket.io setup
 socketService.setup();
 
+
 // Database Setup
 const database = new db();
 database.connect();
+
 
 // Routes
 app.use("/auth", authRoute);

@@ -1,14 +1,15 @@
 const express = require('express');
 const app = express();
 const router = express.Router();
-const model = require('../Model/userSchema');
-const db = require('../DB/db');
+const model = require('../Model/userSchema.js');
+const db = require('../DB/db.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const fs = require('fs');
-
+const multer  = require('multer');
 const database = new db();
+const fileModel = require('../Model/fileSchema.js');
 
 let data = {
     id : String,
@@ -33,10 +34,22 @@ const saveProfile = async (received) => {
     }
 };
 
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './uploads')
+    },
+    filename: function (req, file, cb) {
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+      cb(null, file.fieldname + '-' + uniqueSuffix + '.jpg')
+    }
+});
 
-router.post("/register", (req,res) => {
+const upload = multer({ storage: storage })
+
+router.post("/register", upload.single("ProfilePic") , (req,res) => {
 
     let { FirstName, LastName, Email, Password } = req.body;
+    let { name, type, files, value } = req.file;
 
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(Password, salt, (err, hash) => {
@@ -73,10 +86,18 @@ router.post("/register", (req,res) => {
             .catch((err) => {
                 res.status(500).json({message: "User registration failed"});
             });
+
+            const file = new fileModel({
+            filename: name,
+            contentType: type,
+            data: files, // Binary data
+            });
+
+            database.connect();
+            file.save();
             
         });
     });
-
 });
 
 

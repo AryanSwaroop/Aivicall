@@ -4,7 +4,7 @@ require('dotenv').config();
 const API_ENDPOINTS = require('../API/endpoints');
 const localStorage = new Map();
 const fs = require('fs');
-const model = require('../Model/userSchema');
+const model = require('../Model/userSchema.js');
 const db = require('../DB/db'); 
 const jwt = require('jsonwebtoken');
 
