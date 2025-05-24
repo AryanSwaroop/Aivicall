@@ -1,20 +1,22 @@
 {
-  "id": "107682901339946129136",
-  "displayName": "Sponxer",
+  "id": "109955245781006920258",
+  "displayName": "Aryan Swaroop",
   "name": {
-    "givenName": "Sponxer"
+    "familyName": "Swaroop",
+    "givenName": "Aryan"
   },
   "photos": [
     {
-      "value": "https://lh3.googleusercontent.com/a/ACg8ocJTYr6Wm7IspTo4FYe_-O1rJjUZ2mFB_mBniG6cViqCGQdak-Y=s96-c"
+      "value": "https://lh3.googleusercontent.com/a/ACg8ocLqswiHXibRWLifYJg-sDwfuFu39puadOl5bTUs3aC6JrXc06hF=s96-c"
     }
   ],
   "provider": "google",
-  "_raw": "{\n  \"sub\": \"107682901339946129136\",\n  \"name\": \"Sponxer\",\n  \"given_name\": \"Sponxer\",\n  \"picture\": \"https://lh3.googleusercontent.com/a/ACg8ocJTYr6Wm7IspTo4FYe_-O1rJjUZ2mFB_mBniG6cViqCGQdak-Y\\u003ds96-c\"\n}",
+  "_raw": "{\n  \"sub\": \"109955245781006920258\",\n  \"name\": \"Aryan Swaroop\",\n  \"given_name\": \"Aryan\",\n  \"family_name\": \"Swaroop\",\n  \"picture\": \"https://lh3.googleusercontent.com/a/ACg8ocLqswiHXibRWLifYJg-sDwfuFu39puadOl5bTUs3aC6JrXc06hF\\u003ds96-c\"\n}",
   "_json": {
-    "sub": "107682901339946129136",
-    "name": "Sponxer",
-    "given_name": "Sponxer",
-    "picture": "https://lh3.googleusercontent.com/a/ACg8ocJTYr6Wm7IspTo4FYe_-O1rJjUZ2mFB_mBniG6cViqCGQdak-Y=s96-c"
+    "sub": "109955245781006920258",
+    "name": "Aryan Swaroop",
+    "given_name": "Aryan",
+    "family_name": "Swaroop",
+    "picture": "https://lh3.googleusercontent.com/a/ACg8ocLqswiHXibRWLifYJg-sDwfuFu39puadOl5bTUs3aC6JrXc06hF=s96-c"
   }
 }
