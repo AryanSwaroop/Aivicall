@@ -42,7 +42,6 @@ const Room = () => {
         video: true,
       });
       setMyStream(stream);
-      console.log(`Incoming Call`, from, offer);
       const ans = await peer.getAnswer(offer);
       socket.emit("call:accepted", { to: from, ans });
     },
@@ -58,13 +57,10 @@ const Room = () => {
   const handleCallAccepted = useCallback(
     ({ from, ans }) => {
       peer.setRemoteDisc(ans);
-      console.log("call Accepted");
       sendStreams();
     },
     [sendStreams]
   );
-
-  /******************************************Nego */
 
   const handleNegoNeeded = useCallback(async () => {
     const offer = await peer.getOffer();
@@ -88,22 +84,16 @@ const Room = () => {
 
   const handleNegoNeedFinal = useCallback(async ({ ans }) => {
     await peer.setRemoteDisc(ans);
-    setTimeout(() => {
-      setVisible(false);
-    }, 2000);
+    setTimeout(() => setVisible(false), 2000);
   }, []);
-
-  /******************************************Nego */
 
   useEffect(() => {
     peer.peer.addEventListener("track", async (ev) => {
       const remoteStream = ev.streams;
-      console.log("Tracks Got");
       setRemoteStream(remoteStream[0]);
     });
   }, []);
 
-  /*****************************socket Handeling */
   useEffect(() => {
     socket.on("user:joined", handleUserJoined);
     socket.on("incoming:call", handleIncomingCall);
@@ -126,27 +116,30 @@ const Room = () => {
     handleNegoNeedIncomming,
     handleNegoNeedFinal,
   ]);
-  /*****************************socket Handeling */
 
   return (
     <>
       <Navbar />
-      <div className="main-screen flex flex-col items-center justify-center p-4 space-y-4">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-black via-purple-950 to-black p-4 space-y-6">
         {!remoteSocketId && (
-          <h1 className="text-xl text-gray-500">WAITING FOR PARTNER TO JOIN ...</h1>
+          <h1 className="text-lg text-purple-300 tracking-wider">
+            WAITING FOR PARTNER TO JOIN ...
+          </h1>
         )}
+
         {visible && myStream && (
           <button
             onClick={sendStreams}
-            className="bg-blue-600 text-white py-2 px-6 rounded-lg shadow-lg hover:bg-blue-700 transition"
+            className="bg-purple-700 hover:bg-purple-800 text-white py-2 px-6 rounded-xl shadow-lg transition"
           >
             Connect
           </button>
         )}
+
         {!myStream && remoteSocketId && (
           <button
-            className="bg-green-600 text-white py-2 px-6 rounded-lg shadow-lg hover:bg-green-700 transition"
             onClick={handleCallUser}
+            className="bg-purple-600 hover:bg-purple-700 text-white py-2 px-6 rounded-xl shadow-lg transition"
           >
             Start Meet
           </button>
@@ -155,14 +148,14 @@ const Room = () => {
         {remoteStream && (
           <button
             onClick={muteHandler}
-            className="bg-gray-800 text-white py-2 px-6 rounded-lg shadow-lg hover:bg-gray-700 transition"
+            className="bg-purple-900 hover:bg-purple-800 text-white py-2 px-6 rounded-xl shadow-lg transition"
           >
             {mute ? "Unmute" : "Mute"}
           </button>
         )}
 
-        <div className="flex space-x-4 mt-4">
-          {remoteStream && (
+        <div className="flex space-x-6 mt-6">
+          {myStream && (
             <ReactPlayer
               playing
               muted={mute}
@@ -170,13 +163,11 @@ const Room = () => {
               width="10rem"
               url={myStream}
               style={{
-                border: "solid",
-                borderWidth: "0.1rem",
+                border: "2px solid #7e22ce",
                 borderRadius: "1rem",
               }}
             />
           )}
-
           {remoteStream && (
             <ReactPlayer
               playing
@@ -185,8 +176,7 @@ const Room = () => {
               width="10rem"
               url={remoteStream}
               style={{
-                border: "solid",
-                borderWidth: "0.1rem",
+                border: "2px solid #9333ea",
                 borderRadius: "1rem",
               }}
             />

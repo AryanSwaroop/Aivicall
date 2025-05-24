@@ -11,7 +11,6 @@ const linkVariant = {
     opacity: 0,
     x: -1000,
   },
-
   visible: {
     opacity: 1,
     x: 0,
@@ -22,7 +21,6 @@ const linkVariant = {
   },
 };
 
-// test 3
 export default function CreateLink() {
   const [room, setRoom] = useState("");
   const [id, setId] = useState("");
@@ -43,34 +41,28 @@ export default function CreateLink() {
       .catch((err) => {
         console.log(err);
       });
-
-
   }, [setlinkShow]);
 
   const handleCopy = () => {
     setRoom(userData.data.id);
-    navigator.clipboard.writeText(room);
-    alert("copied to clipboard!");
+    navigator.clipboard.writeText(userData.data.id);
+    alert("Copied to clipboard!");
   };
 
-  const joinHandler = useCallback(
-    (e) => {
-      navigator.clipboard.writeText(room);
-      socket.emit("room:join", { id, room });
-    },
-    [id, room, socket]
-  );
+  const joinHandler = useCallback(() => {
+    navigator.clipboard.writeText(room);
+    socket.emit("room:join", { id, room });
+  }, [id, room, socket]);
 
   const handleJoinRoom = useCallback(
-    (temp) => {
-      const { id, room } = temp;
+    ({ id, room }) => {
       navigate(`/room/${room}`);
     },
     [navigate]
   );
 
   const preJoin = () => {
-    if (setlinkShow) {
+    if (linkShow) {
       setRoom(userData.data.id);
       joinHandler();
     } else {
@@ -80,27 +72,22 @@ export default function CreateLink() {
 
   useEffect(() => {
     socket.on("room:join", handleJoinRoom);
-
-    return () => {
-      socket.off("room:join", handleJoinRoom);
-    };
+    return () => socket.off("room:join", handleJoinRoom);
   }, [handleJoinRoom]);
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center min-h-screen bg-gradient-to-br from-black via-purple-950 to-black px-4 pt-20">
       <motion.button
-        className="bg-blue-500 mt-20 text-white py-2 px-4 rounded-lg shadow-md hover:scale-105 transition-all"
+        className="bg-gradient-to-r from-purple-700 to-purple-500 text-white py-3 px-6 rounded-xl shadow-lg hover:from-purple-800 hover:to-purple-600 transition-all"
         whileHover={{ scale: 1.1 }}
-        onClick={(e) => {
-          setlinkShow(true);
-        }}
+        onClick={() => setlinkShow(true)}
       >
         Join Meeting
       </motion.button>
 
       {linkShow && (
         <motion.div
-          className="mt-4 p-4 bg-white rounded-lg shadow-md w-full max-w-sm flex flex-col items-center"
+          className="mt-6 p-6 bg-black/80 border border-purple-700 text-purple-100 rounded-xl shadow-[0_0_20px_rgba(128,0,255,0.6)] w-full max-w-sm flex flex-col items-center"
           variants={linkVariant}
           initial="hidden"
           animate="visible"
@@ -109,10 +96,11 @@ export default function CreateLink() {
             src="icons/copy.svg"
             className="w-8 h-8 cursor-pointer"
             onClick={handleCopy}
+            alt="copy-icon"
           />
-          <h1 className="text-xl mt-2">Copy the Meeting Code</h1>
+          <h1 className="text-lg mt-2 font-semibold">Copy the Meeting Code</h1>
           <button
-            className="mt-4 bg-green-500 text-white py-2 px-6 rounded-lg shadow-md hover:scale-105 transition-all"
+            className="mt-4 bg-purple-700 hover:bg-purple-800 text-white py-2 px-6 rounded-lg shadow-md transition-all"
             onClick={preJoin}
           >
             JOIN
@@ -122,21 +110,19 @@ export default function CreateLink() {
 
       {linkShow && (
         <motion.div
-          className="mt-4 p-4 bg-white rounded-lg shadow-md w-full max-w-sm flex flex-col items-center"
+          className="mt-6 p-6 bg-black/80 border border-purple-700 text-purple-100 rounded-xl shadow-[0_0_20px_rgba(128,0,255,0.6)] w-full max-w-sm flex flex-col items-center"
           variants={linkVariant}
           initial="hidden"
           animate="visible"
         >
           <input
             placeholder="Paste Here!"
-            className="border-2 border-gray-300 rounded-lg py-2 px-4 w-full"
+            className="w-full px-4 py-2 mb-4 bg-black text-purple-100 border border-purple-600 rounded-lg placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
             type="text"
-            onChange={(e) => {
-              setRoom(e.target.value);
-            }}
+            onChange={(e) => setRoom(e.target.value)}
           />
           <button
-            className="mt-4 bg-yellow-500 text-white py-2 px-6 rounded-lg shadow-md hover:scale-105 transition-all"
+            className="bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-700 hover:to-purple-600 text-white py-2 px-6 rounded-lg shadow-md transition-all"
             onClick={joinHandler}
           >
             JOIN ANOTHER

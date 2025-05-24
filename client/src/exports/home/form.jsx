@@ -60,15 +60,15 @@ const Form = () => {
   return (
     <>
       <Navbar />
-      <div className="flex flex-col items-center justify-center h-screen">
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-black via-purple-950 to-black px-4">
         <form
-          className="w-full max-w-lg mx-auto p-6 bg-white rounded-lg shadow-lg"
+          className="w-full max-w-lg mx-auto p-6 bg-black/80 border border-purple-700 rounded-xl shadow-[0_0_25px_rgba(128,0,255,0.7)]"
           onSubmit={handleSubmit}
           encType="multipart/form-data"
         >
           <label
             htmlFor="fileUpload"
-            className="cursor-pointer m-auto bg-blue-500 text-white font-medium py-2 px-4 rounded-md hover:bg-blue-600 transition-all"
+            className="block text-center mb-4 bg-purple-600 text-white font-medium py-2 px-4 rounded-md hover:bg-purple-700 transition-all cursor-pointer"
           >
             Upload Profile Picture
           </label>
@@ -79,16 +79,17 @@ const Form = () => {
             className="hidden"
             onChange={setValue}
           />
-          <div className="flex mt-5 gap-4 mb-4">
+
+          <div className="flex gap-4 mb-4">
             <input
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 bg-black text-purple-100 border border-purple-600 rounded-lg placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
               name="FirstName"
               type="text"
               placeholder="First Name"
               onChange={setValue}
             />
             <input
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 bg-black text-purple-100 border border-purple-600 rounded-lg placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
               name="LastName"
               type="text"
               placeholder="Last Name"
@@ -96,29 +97,31 @@ const Form = () => {
             />
           </div>
           <input
-            className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-4 py-2 mb-4 bg-black text-purple-100 border border-purple-600 rounded-lg placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
             name="Email"
             type="email"
             placeholder="Email"
             onChange={setValue}
           />
           <input
-            className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-4 py-2 mb-6 bg-black text-purple-100 border border-purple-600 rounded-lg placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
             name="Password"
             type="password"
             placeholder="Password"
             onChange={setValue}
           />
+
           <button
-            className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition"
+            className="w-full py-3 bg-gradient-to-r from-purple-800 to-purple-600 text-white font-semibold rounded-lg hover:from-purple-900 hover:to-purple-700 transition duration-300 shadow-lg"
             type="submit"
           >
-            SignUp
+            Sign Up
           </button>
         </form>
+
         <a
           href="/login"
-          className="mt-5 text-blue-500 cursor-pointer hover:underline"
+          className="mt-6 text-purple-400 hover:underline transition"
         >
           Not New? Login Here
         </a>
