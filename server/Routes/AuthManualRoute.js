@@ -50,8 +50,7 @@ const upload = multer({ storage: storage })
 router.post("/register", upload.single("ProfilePic") , (req,res) => {
 
     let { FirstName, LastName, Email, Password } = req.body;
-    let { name, type, files, value } = req.file;
-
+    
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(Password, salt, (err, hash) => {
 
@@ -89,14 +88,18 @@ router.post("/register", upload.single("ProfilePic") , (req,res) => {
                 console.log(err);
             });
 
-            const file = new fileModel({
-            filename: name,
-            contentType: type,
-            data: files, // Binary data
-            });
+            // Only save file if one was uploaded
+            if (req.file) {
+                const { name, type, files } = req.file;
+                const file = new fileModel({
+                    filename: name,
+                    contentType: type,
+                    data: files, // Binary data
+                });
 
-            database.connect();
-            file.save();
+                database.connect();
+                file.save();
+            }
             
         });
     });
