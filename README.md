@@ -60,7 +60,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Links
 
-- [Live Demo](https://your-live-demo-link.com)
+- [Live Demo](https://aivicall.vercel.app/)
 - [GitHub Repository](https://github.com/AryanSwaroop/Aivicall)
 - [LinkedIn](https://www.linkedin.com/in/aryan-swaroop/)
 
