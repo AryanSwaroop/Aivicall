@@ -41,9 +41,10 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     cookie: {
-        secure: process.env.NODE_ENV === 'production',  // Secure only in production (HTTPS)
-        httpOnly: true,  // Ensures cookie is not accessible via JavaScript (CSRF protection)
-        sameSite: 'none' 
+        secure: process.env.NODE_ENV === 'production',
+        httpOnly: false, 
+        sameSite: 'none',
+        secure: 'true'
     }
 }));
 
@@ -54,25 +55,22 @@ app.use(cors({
     origin: API_ENDPOINTS.FRONT_URL,
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
-    sameSite: 'none' 
+    sameSite: 'none',
+    secure: 'true'
 }));
-
 
 // Socket.io setup
 socketService.setup();
 
-
 // Database Setup
 const database = new db();
 database.connect();
-
 
 // Routes
 app.use("/auth", authRoute);
 app.use("/ai", AIServiceRoutes);
 app.use("/meet", MeetRoute);
 app.use("/manual", registerRoute);
-
 
 // Server setup
 server.listen(5000, () => {

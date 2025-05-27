@@ -10,6 +10,7 @@ const fs = require('fs');
 const multer  = require('multer');
 const database = new db();
 const fileModel = require('../Model/fileSchema.js');
+const cors = require('cors');
 
 let data = {
     id : String,
@@ -85,6 +86,7 @@ router.post("/register", upload.single("ProfilePic") , (req,res) => {
             })
             .catch((err) => {
                 res.status(500).json({message: "User registration failed"});
+                console.log(err);
             });
 
             const file = new fileModel({
@@ -119,20 +121,33 @@ router.post("/login", async (req, res) => {
             return res.status(401).json({ message: "Invalid credentials" });
         }
 
-        const token = jwt.sign({ userId: found._id }, process.env.JWT_SECRET, { expiresIn: '60s' });
+        const token = jwt.sign({ userId: found._id }, process.env.JWT_SECRET, { expiresIn: '2000s' });
 
-        res.cookie("token", token);
-        res.status(200).json({message: "User registered successfully"});
+        // Set cookie and send token in response
+        res.cookie("token", token, {
+            httpOnly: false,  // Allow JavaScript access
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'none',
+            secure: 'true'
+        });
+        
+        res.status(200).json({
+            message: "User logged in successfully",
+            token: token  // Send token in response
+        });
 
     } catch (err) {
         return res.status(500).json({ message: "Login failed", error: err.message });
     }
 });
 
-router.post("/login", async (req, res) => {
-    res.clearCookie("token");
+router.post("/logout", async (req, res) => {
+    res.clearCookie("token", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "Strict"
+    });
+    res.status(200).json({ message: "Logged out successfully" });
 });
-
-
 
 module.exports = router;

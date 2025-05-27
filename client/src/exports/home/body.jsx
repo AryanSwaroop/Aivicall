@@ -38,7 +38,7 @@ export default function Body() {
       <motion.button
         className="mt-10 bg-gradient-to-r from-purple-700 to-purple-500 text-white py-3 px-8 rounded-xl flex items-center hover:scale-105 hover:shadow-purple-700/50 transition-all duration-300"
         whileHover={{ scale: 1.05 }}
-        onClick={() => setStatus(true)}
+        onClick={() => {if (document.cookie.length > 0){window.location.href = "/create"} else {setStatus(true)}}}
       >
         Get Started
         <img src="icons/startedArrow.svg" alt="arrow" className="ml-3 w-6 h-6" />

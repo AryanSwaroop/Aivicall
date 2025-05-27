@@ -19,7 +19,9 @@ const Login = () => {
 
   const sendLoginData = () => {
     axiosInstance
-      .post(API_ENDPOINTS.MANUAL_LOGIN, login)
+      .post(API_ENDPOINTS.MANUAL_LOGIN, login, {
+        withCredentials: true  // Explicitly enable credentials for this request
+      })
       .then((res) => {
         if (res.status === 200) {
           console.log("User logged in successfully");
@@ -27,7 +29,19 @@ const Login = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
+        console.error("Login error:", err);
+        if (err.response) {
+          if (err.response.status === 404) {
+            alert("Credential is incorrect");
+            window.location.href = "/form";
+          } else if (err.response.status === 500) {
+            alert("Credential is incorrect");
+            window.location.href = "/form";
+          } else if (err.response.status === 401) {
+            alert("Credential is incorrect");
+            window.location.href = "/form";
+          }
+        }
       });
   };
 
